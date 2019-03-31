@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://megatravel.com/schema" xmlns="http://megatravel.com/schema">
+
+    <xs:element name="user">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+                <xs:element name="firstName">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:minLength value="3"/>
+                            <xs:maxLength value="20"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="lastName">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:minLength value="3"/>
+                            <xs:maxLength value="20"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="userName">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:minLength value="3"/>
+                            <xs:maxLength value="20"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element ref="address"/>
+                <xs:element name="role">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="ADMIN"/>
+                            <xs:enumeration value="AGENT"/>
+                            <xs:enumeration value="COSTUMER"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="address">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="country" type="xs:string"/>
+                <xs:element name="city" type="xs:string"/>
+                <xs:element name="street" type="xs:string"/>
+                <xs:element name="number">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:int">
+                            <xs:minInclusive value="1"/>
+                            <xs:maxInclusive value="1000"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="latitude">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:float">
+                            <xs:minInclusive value="-90"/>
+                            <xs:maxInclusive value="90"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="longitude">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:float">
+                            <xs:minInclusive value="-180"/>
+                            <xs:maxInclusive value="180"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="accomodation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:ID"/>
+                <xs:element name="name">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:minLength value="1"/>
+                            <xs:maxLength value="20"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="type">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:minLength value="1"/>
+                            <xs:maxLength value="20"/>
+                            <xs:enumeration value="Hotel"/>
+                            <xs:enumeration value="Bead &amp; Breakfast"/>
+                            <xs:enumeration value="Apartman"/>
+                            <xs:enumeration value="Vila"/>
+                            <xs:enumeration value="Resort"/>
+                            <xs:enumeration value="Cottages"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element ref="user"/>
+                <xs:element ref="address"/>
+                <xs:element name="ReservredFrom" type="xs:date"/>
+                <xs:element name="ReservedTo" type="xs:date"/>
+                <xs:element maxOccurs="1" minOccurs="1" name="Description">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:minLength value="1"/>
+                            <xs:maxLength value="150"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="Image" type="xs:string" maxOccurs="unbounded" minOccurs="1"/>
+                <xs:element name="rating" type="xs:int"/>
+                <xs:element name="category">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="nekategorisan"/>
+                            <xs:enumeration value="1 star"/>
+                            <xs:enumeration value="2 star"/>
+                            <xs:enumeration value="3 star"/>
+                            <xs:enumeration value="4 star"/>
+                            <xs:whiteSpace value="preserve"/>
+                            <xs:enumeration value="5 star"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element maxOccurs="12" minOccurs="0" ref="aditionalServices"/>
+                <xs:element ref="room"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="aditionalServices">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:ID"/>
+                <xs:element name="name">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:pattern value=""/>
+                            <xs:enumeration value="parking"/>
+                            <xs:enumeration value="WiFi"/>
+                            <xs:enumeration value="Breakfast"/>
+                            <xs:enumeration value="Half-board"/>
+                            <xs:enumeration value="Full-board"/>
+                            <xs:enumeration value="All Inclusive"/>
+                            <xs:enumeration value="Pet freandly"/>
+                            <xs:enumeration value="TV"/>
+                            <xs:enumeration value="Kitchen"/>
+                            <xs:enumeration value="Bathroom"/>
+                            <xs:enumeration value="Free Canceling"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="price" type="xs:float"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="reservation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id"/>
+                <xs:element ref="user"/>
+                <xs:element ref="accomodation"/>
+                <xs:element ref="freeReservation"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="messages">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="user"/>
+                <xs:element name="content" type="xs:string"/>
+                <xs:element name="date" type="xs:date"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="freeReservation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Allowed" type="xs:boolean"/>
+                <xs:element name="numberOfdays" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="room">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:ID"/>
+                <xs:element name="BedNumber" type="xs:int"/>
+                <xs:element name="price" type="xs:float"/>
+                <xs:element name="From" type="xs:date"/>
+                <xs:element name="To" type="xs:date"/>
+                <xs:element name="RoomStatus">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="Free"/>
+                            <xs:enumeration value="Ocupied"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="RoomService">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="Cleaning"/>
+                            <xs:enumeration value="Food deliveri"/>
+                            <xs:enumeration value="Escort service "/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UserReview ">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="user"/>
+                <xs:element ref="accomodation"/>
+                <xs:element name="rating">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:unsignedInt">
+                            <xs:minInclusive value="1"/>
+                            <xs:maxInclusive value="10"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="comment" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
