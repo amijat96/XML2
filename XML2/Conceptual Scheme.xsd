@@ -193,8 +193,8 @@
                 <xs:element name="id" type="xs:ID"/>
                 <xs:element name="BedNumber" type="xs:int"/>
                 <xs:element name="price" type="xs:float"/>
-                <xs:element name="From" type="xs:date"/>
-                <xs:element name="To" type="xs:date"/>
+                <xs:element name="FromRoom" type="xs:date"/>
+                <xs:element name="ToRoom" type="xs:date"/>
                 <xs:element name="RoomStatus">
                     <xs:simpleType>
                         <xs:restriction base="xs:string">
