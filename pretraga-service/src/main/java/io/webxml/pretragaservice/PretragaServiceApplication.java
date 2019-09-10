@@ -11,6 +11,14 @@ import org.springframework.web.client.RestTemplate;
 @EnableEurekaClient
 public class PretragaServiceApplication {
 	
-
+	@Bean
+	@LoadBalanced
+	public RestTemplate getRestTemplate() {
+		return new RestTemplate();
+	}
+	
+	public static void main(String[] args) {
+		SpringApplication.run(PretragaServiceApplication.class, args);
+	}
 
 }
